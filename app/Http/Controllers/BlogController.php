@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Entries;
+use App\Entry;
+use App\User;
 
 class BlogController extends Controller
 {
@@ -14,7 +15,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return response(Entries::all());
+        return response(Entry::with('user')->get());
     }
 
     /**
@@ -34,7 +35,7 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $entry = new Entries;
+        $entry = new Entry;
         $entry->fill($request->all())->save();
         return response($entry, 200);
     }
@@ -47,7 +48,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        return response(Entries::find($id));
+        return response(Entry::find($id));
     }
 
     /**
@@ -79,7 +80,7 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        Entries::where('id', $id)->delete();
+        Entry::where('id', $id)->delete();
         return response();
     }
 }

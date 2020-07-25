@@ -9,7 +9,7 @@
             </ul>
             <h2>recent</h2>
             <ul>
-                <li v-for="(entry, index) in entriesAll" :key="index">
+                <li v-for="(entry, index) in entriesRecent" :key="index">
                     <nuxt-link :to="{name:'entries-id', params:{id:entry.id}}">
                         {{entry.title}}
                     </nuxt-link>
@@ -36,7 +36,7 @@ import { mapGetters } from 'vuex';
 export default {
     computed: {
         ...mapGetters({
-            entriesAll: 'entriesAll'
+            entriesRecent: 'entriesRecent'
         })
     },
     mounted: function() {

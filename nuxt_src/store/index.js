@@ -24,6 +24,10 @@ export const actions = {
 export const getters = {
     entriesAll: (state) => {
         const {entriesAll} = state;
-        return entriesAll;
+        return entriesAll.concat();
+    },
+    entriesRecent: (state) => {
+        const {entriesAll} = state;
+        return entriesAll.concat().reverse().filter((_, idx) => idx < 5);
     }
 };
