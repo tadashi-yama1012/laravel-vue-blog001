@@ -2,11 +2,16 @@
     <div>
         <h1>index</h1>
         <ul class="entries">
-            <li v-for="(entry, index) in entriesRecent" :key="index">
-                <h3>{{entry.title}}</h3>
+            <li v-for="(entry, index) in entries" :key="index">
+                <h3>
+                    <nuxt-link :to="{name:'entries-id', params:{id:entry.id}}">
+                        {{entry.title}}
+                    </nuxt-link>
+                </h3>
                 <div>{{entry.body}}</div>
                 <br/>
                 <div><small>author:{{entry.user.name}} date:{{entry.date}}</small></div>
+                <hr/>
             </li>
         </ul>
     </div>
@@ -30,7 +35,7 @@ export default {
     },
     computed: {
         ...mapGetters({
-            entriesRecent: 'entriesRecent'
+            entries: 'entriesAll'
         })
     },
 }

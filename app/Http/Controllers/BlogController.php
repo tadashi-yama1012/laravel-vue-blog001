@@ -48,7 +48,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        return response(Entry::find($id));
+        return response(Entry::with('user')->find($id));
     }
 
     /**
