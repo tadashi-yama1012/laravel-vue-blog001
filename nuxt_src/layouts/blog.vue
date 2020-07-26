@@ -5,6 +5,7 @@
             <h2>navi</h2>
             <ul>
                 <li><nuxt-link to="/">index</nuxt-link></li>
+                <li><nuxt-link to="/login">login</nuxt-link></li>
                 <li><nuxt-link to="/write">write</nuxt-link></li>
             </ul>
             <h2>recent</h2>
@@ -40,6 +41,7 @@ export default {
         })
     },
     mounted: function() {
+        this.$store.dispatch('fetchToken');
         this.$store.dispatch('fetchEntries');
     }
 }

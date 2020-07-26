@@ -4,7 +4,7 @@
         <h3>{{entry.title}}</h3>
         <div>{{entry.body}}</div>
         <br/>
-        <div><small>author:{{entry.user.name}} date:{{entry.date}}</small></div>
+        <div><small>author:{{name}} date:{{entry.date}}</small></div>
     </div>
 </template>
 
@@ -21,7 +21,10 @@ export default {
     computed: {
         ...mapGetters({
             entry: 'entry'
-        })
+        }),
+        name: function() {
+            return this.entry.user ? this.entry.user.name : '';
+        }
     },
     mounted: function() {
         this.$store.dispatch('fetchEntry', this.$route.params.id);

@@ -15,6 +15,14 @@ export const mutations = {
 };
 
 export const actions = {
+    fetchToken: async () => {
+        try {
+            axios.defaults.withCredentials = true;
+            await axios.get('http://localhost:8000/token');
+        } catch (error) {
+            console.error(error);
+        }
+    },
     fetchEntries: async ({commit}) => {
         try {
             const { data } = await axios.get('http://localhost:8000/api/blog');
