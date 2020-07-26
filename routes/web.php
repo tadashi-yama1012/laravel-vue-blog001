@@ -21,3 +21,4 @@ Route::get('token', function() {
 });
 Route::get('logged', 'LoginController@logged');
 Route::post('login', 'LoginController@login');
+Route::post('logout', 'LoginController@logout');

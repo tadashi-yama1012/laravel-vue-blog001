@@ -10,9 +10,9 @@ class LoginController extends Controller
     
     public function logged(Request $req) 
     {
-        $logged = $req->session()->get('logged');
+        $user = $req->session()->get('user');
         return response()->json([
-            'logged' => $logged === true ? 'yes' : 'no'
+            'logged' => $logged !== null ? 'yes' : 'no'
         ]);
     }
 
@@ -24,11 +24,20 @@ class LoginController extends Controller
         $found = User::where('name', $name)->first();
         if ($found !== null) {
             if ($found->password === $pass) {
+                $req->session()->put('user', $name);
                 $result = true;
             }
         }
         return response()->json([
             'result' => $result === true ? 'ok' : 'ng'
+        ]);
+    }
+
+    public function logout(Request $req) 
+    {
+        $req->session()->forget('user');
+        return response()->json([
+            'result' => 'ok'
         ]);
     }
 

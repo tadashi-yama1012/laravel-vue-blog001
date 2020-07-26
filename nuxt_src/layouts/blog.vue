@@ -6,7 +6,9 @@
             <ul>
                 <li><nuxt-link to="/">index</nuxt-link></li>
                 <li><nuxt-link to="/login">login</nuxt-link></li>
-                <li><nuxt-link to="/write">write</nuxt-link></li>
+                <template v-if="user !== null">
+                    <li><nuxt-link to="/write">write</nuxt-link></li>
+                </template>
             </ul>
             <h2>recent</h2>
             <ul>
@@ -37,6 +39,7 @@ import { mapGetters } from 'vuex';
 export default {
     computed: {
         ...mapGetters({
+            user: 'user',
             entriesRecent: 'entriesRecent'
         })
     },
