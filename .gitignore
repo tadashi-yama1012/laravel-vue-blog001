@@ -5,7 +5,8 @@
 /vendor
 /.nuxt
 /dist
-/public/_nuxt
+/public/js
+/public/css
 .env
 .env.backup
 .phpunit.result.cache
