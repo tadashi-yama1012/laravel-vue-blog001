@@ -22,18 +22,21 @@ export const mutations = {
 };
 
 export const actions = {
-    fetchToken: async () => {
+    registration: async ({}, payload) => {
         try {
-            axios.defaults.withCredentials = true;
-            await axios.get('http://localhost:8000/token');
+            const {data} = await axios.post('/api/registration', {
+                name: payload.name,
+                email: payload.email,
+                password: payload.password
+            });
+            console.log(data);
         } catch (error) {
             console.error(error);
         }
     },
     login: async ({commit}, payload) => {
         try {
-            axios.defaults.withCredentials = true;
-            const {data} = await axios.post('http://localhost:8000/login', {
+            const {data} = await axios.post('/api/login', {
                 name: payload.name,
                 password: payload.password
             });
@@ -46,8 +49,7 @@ export const actions = {
     },
     logout: async ({commit}) => {
         try {
-            axios.defaults.withCredentials = true;
-            await axios.post('http://localhost:8000/logout');
+            await axios.post('/api/logout');
             commit('unsetUser');
         } catch (error) {
             console.error(error);
@@ -55,7 +57,7 @@ export const actions = {
     },
     fetchEntries: async ({commit}) => {
         try {
-            const { data } = await axios.get('http://localhost:8000/api/blog');
+            const { data } = await axios.get('/api/blog');
             commit('setEntries', data);
         } catch (error) {
             console.error(error);
@@ -63,7 +65,7 @@ export const actions = {
     },
     fetchEntry: async ({commit}, payload) => {
         try {
-            const {data} = await axios.get('http://localhost:8000/api/blog/' + payload);
+            const {data} = await axios.get('/api/blog/' + payload);
             commit('setEntry', data);
         } catch (error) {
             console.error(error);

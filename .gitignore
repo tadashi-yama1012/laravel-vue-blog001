@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 /.nuxt
+/dist
+/public/_nuxt
 .env
 .env.backup
 .phpunit.result.cache

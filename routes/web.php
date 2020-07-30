@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('token', function() {
-    return response('ok', 200);
-});
-Route::get('logged', 'LoginController@logged');
-Route::post('login', 'LoginController@login');
-Route::post('logout', 'LoginController@logout');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

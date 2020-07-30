@@ -1,3 +1,8 @@
 export default {
-    srcDir: 'nuxt_src/'
+    srcDir: 'resources/js',
+    mode: 'universal',
+    target: 'static',
+    generate: {
+        dir: 'dist'
+    }
 }
