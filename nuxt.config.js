@@ -1,7 +1,6 @@
 export default {
     srcDir: 'resources/js',
-    mode: 'universal',
-    target: 'static',
+    mode: 'spa',
     generate: {
         dir: 'dist'
     }

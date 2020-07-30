@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "build": "nuxt build && nuxt export",
+        "build": "nuxt generate && nuxt export && cpx 'dist/_nuxt/**' public/_nuxt && cpx 'dist/index.html' resources/views && mv resources/views/index.html resources/views/welcome.blade.php",
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",
@@ -13,6 +13,7 @@
     "devDependencies": {
         "axios": "^0.19",
         "bootstrap": "^4.0.0",
+        "cpx": "^1.5.0",
         "cross-env": "^7.0",
         "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
