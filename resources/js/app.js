@@ -1,9 +1,10 @@
-import Vue from 'vue';
-import top from './components/top.vue';
-
-Vue.component('top', top);
+import './bootstrap';
+import {store} from './store';
+import {router} from './router';
 
 new Vue({
     el: '#app',
-    template: '<top />'
+    template: '<router-view></router-view>',
+    store: store,
+    router: router
 });

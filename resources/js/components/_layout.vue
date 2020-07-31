@@ -2,7 +2,7 @@
     <div class="container">
         <div class="left">
             <h1>blog</h1>
-            <h3>navi</h3>
+            <navi/>
         </div>
         <div class="right">
             <slot></slot>
@@ -16,3 +16,12 @@
     grid-template-columns: 220px 1fr;
 }
 </style>
+
+<script>
+import navi from './navi.vue';
+export default {
+    components: {
+        navi
+    }
+}
+</script>
