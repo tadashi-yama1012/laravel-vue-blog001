@@ -41,6 +41,9 @@ const store = new Vuex.Store({
         }
     },
     getters: {
+        logged: (state) => {
+            return state.user !== null;
+        },
         entries: (state) => {
             return state.entries.reverse();
         }

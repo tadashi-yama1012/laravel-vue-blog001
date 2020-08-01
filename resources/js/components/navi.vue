@@ -3,8 +3,10 @@
         <h3>navigation</h3>
         <ul>
             <li><router-link to="/">top</router-link></li>
-            <li><router-link to="/login">login</router-link></li>
-            <li><router-link to="/write">write</router-link></li>
+            <li><router-link to="/login">login/logout</router-link></li>
+            <template v-if="logged">
+                <li><router-link to="/write">write</router-link></li>
+            </template>
         </ul>
         <h3>recent entries</h3>
         <ul></ul>
@@ -12,5 +14,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+    computed: {
+        logged: function() {
+            return this.$store.getters.logged;
+        }
+    }
+}
 </script>
