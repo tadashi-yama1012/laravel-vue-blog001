@@ -81,6 +81,8 @@ class BlogController extends Controller
     public function destroy($id)
     {
         Entry::where('id', $id)->delete();
-        return response();
+        return response()->json([
+            'message' => 'delete success'
+        ]);
     }
 }

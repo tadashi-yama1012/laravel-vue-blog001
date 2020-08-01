@@ -23,4 +23,5 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('logout', 'Api\AuthController@logout');
     Route::get('me', 'Api\AuthController@me');
     Route::post('blog', 'BlogController@store');
+    Route::delete('blog/{id}', 'BlogController@destroy');
 });

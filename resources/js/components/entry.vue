@@ -14,6 +14,11 @@
                      date:{{entry.date}}
                 </small>
             </div>
+            <template v-if="entry.user && entry.user.id === userId">
+                <div>
+                    <button @click="handleDelete">delete entry</button>
+                </div>
+            </template>
         </template>
     </layout>
 </template>
@@ -30,6 +35,9 @@ export default {
         };
     },
     computed: {
+        userId: function() {
+            return this.$store.getters.userId;
+        },
         entry: function() {
             return this.$store.getters.entry;
         }
@@ -37,6 +45,10 @@ export default {
     methods: {
         fetchEntry: function() {
             this.$store.dispatch('fetchEntry', this.$route.params.id);
+        },
+        handleDelete: async function() {
+            await this.$store.dispatch('deleteEntry', this.entryId);
+            this.$router.push('/');
         }
     },
     created: function() {

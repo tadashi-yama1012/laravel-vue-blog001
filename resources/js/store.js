@@ -51,6 +51,11 @@ const store = new Vuex.Store({
             const {data} = await axios.post('/api/blog?token=' + state.user.token, payload);
             console.log(data);
             await dispatch('fetchEntries');
+        },
+        async deleteEntry({state, dispatch}, payload) {
+            const {data} = await axios.delete('/api/blog/' + payload + '?token=' + state.user.token);
+            console.log(data);
+            await dispatch('fetchEntries');
         }
     },
     getters: {
