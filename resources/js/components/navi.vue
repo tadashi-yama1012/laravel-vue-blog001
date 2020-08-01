@@ -9,7 +9,11 @@
             </template>
         </ul>
         <h3>recent entries</h3>
-        <ul></ul>
+        <ul>
+            <li v-for="(entry, idx) in recent" :key="idx">
+                <router-link :to="{name: 'entry', params: {id: entry.id}}">{{entry.title}}</router-link>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -18,6 +22,9 @@ export default {
     computed: {
         logged: function() {
             return this.$store.getters.logged;
+        },
+        recent: function() {
+            return this.$store.getters.recentEntries;
         }
     }
 }

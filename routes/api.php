@@ -18,7 +18,7 @@ Route::post('registration', 'Api\AuthController@registration');
 Route::post('login', 'Api\AuthController@login');
 Route::get('refresh', 'Api\AuthController@refresh');
 Route::get('blog', 'BlogController@index');
-Route::get('blog/:id', 'BlogController@show');
+Route::get('blog/{id}', 'BlogController@show');
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('logout', 'Api\AuthController@logout');
     Route::get('me', 'Api\AuthController@me');

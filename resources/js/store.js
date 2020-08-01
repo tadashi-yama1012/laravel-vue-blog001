@@ -4,7 +4,8 @@ import axios from 'axios';
 const store = new Vuex.Store({
     state: {
         user: null,
-        entries: []
+        entries: [],
+        entry: null
     },
     mutations: {
         setUser(state, user) {
@@ -15,6 +16,9 @@ const store = new Vuex.Store({
         },
         setEntries(state, entries) {
             state.entries = entries;
+        },
+        setEntry(state, entry) {
+            state.entry = entry;
         }
     },
     actions: {
@@ -27,8 +31,8 @@ const store = new Vuex.Store({
             const token = data.access_token;
             if (token) {
                 const {data} = await axios.get('/api/me?token=' + token);
-                commit('setUser', {token, user: data});
-                console.log(token, data);
+                commit('setUser', {token, ...data});
+                console.log(this.state.user);
             }
         },
         async logout({commit, state}) {
@@ -38,14 +42,36 @@ const store = new Vuex.Store({
         async fetchEntries({commit}) {
             const {data} = await axios.get('/api/blog');
             commit('setEntries', data);
+        },
+        async fetchEntry({commit}, payload) {
+            const {data} = await axios.get('/api/blog/' + payload);
+            commit('setEntry', data);
+        },
+        async postEntry({state, dispatch}, payload) {
+            const {data} = await axios.post('/api/blog?token=' + state.user.token, payload);
+            console.log(data);
+            await dispatch('fetchEntries');
         }
     },
     getters: {
         logged: (state) => {
             return state.user !== null;
         },
+        userId: (state) => {
+            if (state.user) {
+                return state.user.id;
+            } else {
+                return -1;
+            }
+        },
         entries: (state) => {
-            return state.entries.reverse();
+            return [...state.entries].reverse();
+        },
+        recentEntries: (state) => {
+            return [...state.entries].reverse().filter((_, i) => i < 5);
+        },
+        entry: (state) => {
+            return Object.assign({}, state.entry);
         }
     }
 });

@@ -8,7 +8,7 @@ const routes = [
     {path: '/', component: top},
     {path: '/login', component: login},
     {path: '/write', component: write},
-    {path: '/entry/:id', component: entry}
+    {path: '/entry/:id', name: 'entry', component: entry}
 ];
 
 const router = new VueRouter({
