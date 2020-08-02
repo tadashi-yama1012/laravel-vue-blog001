@@ -52,6 +52,16 @@ const store = new Vuex.Store({
             console.log(data);
             await dispatch('fetchEntries');
         },
+        async updateEntry({state, dispatch}, payload) {
+            const url = '/api/blog/' + payload.id + '?token=' + state.user.token;
+            const {data} = await axios.post(url, {
+                title: payload.title,
+                body: payload.body,
+                date: payload.date
+            });
+            console.log(data);
+            await dispatch('fetchEntries');
+        },
         async deleteEntry({state, dispatch}, payload) {
             const {data} = await axios.delete('/api/blog/' + payload + '?token=' + state.user.token);
             console.log(data);

@@ -70,6 +70,9 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $entry = Entry::find($id);
+        $entry->fill($request->all())->save();
+        return response($entry, 200);
     }
 
     /**

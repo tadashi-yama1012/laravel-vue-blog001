@@ -16,6 +16,7 @@
             </div>
             <template v-if="entry.user && entry.user.id === userId">
                 <div>
+                    <button @click="handleEdit">edit entry</button>
                     <button @click="handleDelete">delete entry</button>
                 </div>
             </template>
@@ -49,6 +50,9 @@ export default {
         handleDelete: async function() {
             await this.$store.dispatch('deleteEntry', this.entryId);
             this.$router.push('/');
+        },
+        handleEdit: function() {
+            this.$router.push('/edit/' + this.entryId);
         }
     },
     created: function() {
