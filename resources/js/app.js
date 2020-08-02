@@ -9,4 +9,5 @@ const app = new Vue({
     router: router
 });
 
+app.$store.dispatch('resume');
 app.$store.dispatch('fetchEntries');

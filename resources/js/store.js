@@ -32,12 +32,21 @@ const store = new Vuex.Store({
             if (token) {
                 const {data} = await axios.get('/api/me?token=' + token);
                 commit('setUser', {token, ...data});
+                localStorage.setItem('user', JSON.stringify({token, ...data}));
                 console.log(this.state.user);
             }
         },
         async logout({commit, state}) {
             await axios.post('/api/logout?token=' + state.user.token);
             commit('unsetUser');
+            localStorage.removeItem('user');
+        },
+        async resume({commit}) {
+            const data = localStorage.getItem('user');
+            if (data) {
+                const user = JSON.parse(data)
+                commit('setUser', user);
+            }
         },
         async fetchEntries({commit}) {
             const {data} = await axios.get('/api/blog');
