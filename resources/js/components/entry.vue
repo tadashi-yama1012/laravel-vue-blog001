@@ -14,7 +14,21 @@
                      date:{{entry.date}}
                 </small>
             </div>
+            <div>
+                <h4>comment</h4>
+                <ul>
+                    <li v-for="(comment, idx) in entry.comments" :key="idx">
+                        <div>{{comment.body}}</div>
+                        <div><small>author:{{comment.name}} date:{{comment.date}}</small></div>
+                    </li>
+                </ul>
+                <hr>
+                <div>name<input type="text" v-model="cname"></div>
+                <div>comment<input type="text" v-model="cbody"></div>
+                <div><button>send</button></div>
+            </div>
             <template v-if="entry.user && entry.user.id === userId">
+                <hr>
                 <div>
                     <button @click="handleEdit">edit entry</button>
                     <button @click="handleDelete">delete entry</button>
@@ -32,7 +46,9 @@ export default {
     },
     data: function() {
         return {
-            entryId: this.$route.params.id || -1
+            entryId: this.$route.params.id || -1,
+            cname: '',
+            cbody: ''
         };
     },
     computed: {

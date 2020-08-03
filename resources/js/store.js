@@ -37,7 +37,11 @@ const store = new Vuex.Store({
             }
         },
         async logout({commit, state}) {
-            await axios.post('/api/logout?token=' + state.user.token);
+            try {
+                await axios.post('/api/logout?token=' + state.user.token);
+            } catch (error) {
+                console.error(error);
+            }
             commit('unsetUser');
             localStorage.removeItem('user');
         },

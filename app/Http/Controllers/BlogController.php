@@ -15,7 +15,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return response(Entry::with('user')->get());
+        return response(Entry::with(['user'])->get());
     }
 
     /**
@@ -48,7 +48,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        return response(Entry::with('user')->find($id));
+        return response(Entry::with(['user', 'comments'])->find($id));
     }
 
     /**
